@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 
-function CodeEditor() {
-  const [code, setCode] = useState('');
-
+function CodeEditor(props) {
+  const {code, setCode}=props;
   useEffect(() => {
     // Handle initial code value or other effects
   }, []);
 
   const handleCodeChange = (newCode) => {
     setCode(newCode);
-    console.log(newCode);
+    // console.log(newCode);
   };
 
   return (

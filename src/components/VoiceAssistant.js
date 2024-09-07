@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import mic from '../Images/mic.webp'
 
 const VoiceAssistant = () => {
   useEffect(() => {
@@ -28,7 +29,7 @@ const VoiceAssistant = () => {
 
   return (
     <div>
-      <button id="start-record-btn">Start Recording</button>
+      <button id="start-record-btn" style={{ backgroundColor:"white", border:"none", borderRadius:"25%"}}><img style={{width:"30px"}} src={mic}/></button>
     </div>
   );
 };

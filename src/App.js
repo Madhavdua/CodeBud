@@ -3,10 +3,13 @@ import CodeEditor from './components/CodeEditor';
 import VoiceAssistant from './components/VoiceAssistant';
 import ChatInterface from './components/ChatInterface';
 import './App.css';
+import SaveCode from './components/SaveCode';
+import PickFile from './components/PickFile';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  
+  const [code, setCode] = useState('');
+  const [fileName, setfileName] = useState('MyCode.txt');
 
   const toggleMode = () => {
     setDarkMode(!darkMode);
@@ -24,7 +27,7 @@ function App() {
     <div className={`App ${darkMode ? 'dark-mode' : ''}`}>
       <div className="content">
         <div className="editor-container">
-          <CodeEditor language={'java'} />
+          <CodeEditor code={code} setCode={setCode} />
         </div>
         <div className="chat-interface">
           <ChatInterface />
@@ -37,6 +40,8 @@ function App() {
             </button>
           </div>
           <VoiceAssistant />
+          <SaveCode code={code} fileName={fileName} setfileName={setfileName}/>
+          <PickFile code={code} setCode={setCode}/>
         </div>
       </div>
     </div>
