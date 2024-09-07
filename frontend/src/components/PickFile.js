@@ -14,7 +14,7 @@ function PickFile(props) {
   };
   return (
     <>
-      <label for="file">Choose a file</label>
+      <label htmlFor="file">Choose a file</label>
       <input className="inputfile" id="file" name="file" type="file" onChange={handleFileChange}  accept=".txt, .doc,.docx,.js , .html, .css, .java" />
     </>
   );

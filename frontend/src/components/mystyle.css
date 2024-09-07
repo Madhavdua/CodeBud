@@ -89,3 +89,48 @@ input[type="file"]::file-selector-button:hover {
 input[type="file"]::file-selector-button:active {
   background-color: #e5e7eb;
 }
+
+
+/* for */
+.chat-message {
+  height: 400px;
+  width: 400px;
+   /* Set a fixed height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  scrollbar-width: thin; /* Firefox support for a thin scrollbar */
+}
+/* Style for the Run Code button */
+.run-code-button {
+  background-color: #007bff; /* Blue background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Padding for a larger button */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Show pointer on hover */
+  font-size: 16px; /* Larger text */
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+/* Hover effect for the button */
+.run-code-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Output container */
+.output-container {
+  width: 400px;
+  margin: 10px 2px; /* Add margin */
+  padding: 15px; /* Add padding inside the box */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background */
+  font-family: 'Courier New', Courier, monospace; /* Monospace font for code-like output */
+  color: #333; /* Dark text color */
+  white-space: pre-wrap; /* Preserve formatting of code output */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for better visibility */
+}
