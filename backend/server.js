@@ -54,7 +54,7 @@ app.post("/api/query/:msg", async (req, res) => {
         apiUrl,
         {
           prompt: query,
-          max_tokens: 50, // Adjust as needed
+          max_tokens: 200, // Adjust as needed
         },
         {
           headers: {

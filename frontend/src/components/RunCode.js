@@ -29,7 +29,7 @@ function RunCode(props) {
   return (
     <>
     <div className="my-2 d-flex px-2" >
-      <button className="run-code-button" onClick={handleRun}>
+      <button className="run-code-button" style={{height:"50px"}} onClick={handleRun}>
         Run Code
       </button>
       <div className="output-container">
