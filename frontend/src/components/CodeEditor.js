@@ -15,13 +15,21 @@ function CodeEditor(props) {
 
   return (
     <>
-      <MonacoEditor
-        value={code}
-        onChange={handleCodeChange}
-        language="javascript" // Adjust language as needed
-        theme="vs-dark" // Optional: Choose a theme
-      />
-      <RunCode code={code} />
+      <div className="d-flex" style={{height:"75vh"}}>
+        <div className="" style={{flexGrow:1}}>
+          <MonacoEditor
+            value={code}
+            onChange={handleCodeChange}
+            language="javascript"
+            theme="vs-dark"
+            options={{
+              automaticLayout: true, // Ensure resizing
+            }}
+          />
+        </div>
+      </div>
+
+      {/* <RunCode code={code} /> */}
     </>
   );
 }

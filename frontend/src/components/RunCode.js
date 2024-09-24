@@ -3,9 +3,9 @@ import Output from "./Output";
 import "./mystyle.css";
 
 function RunCode(props) {
-  const [output, setoutput] = useState(null);
+  const { setoutput } = props;
   const handleRun = async () => {
-    const { code } = props;
+    const { code, setwhite } = props;
     try {
       const response = await fetch("http://localhost:5000/run-code", {
         method: "POST",
@@ -22,21 +22,27 @@ function RunCode(props) {
       const data = await response.json();
       //   console.log('Backend response:', data); // Debugging line
       setoutput(data.output);
+      if(data.output.length==0){
+        setoutput("Nothing to print");
+      }
+      setwhite("output");
       //   term.current.write(`\r\n${data.output}\r\n`);
       //   console.log('Writing to terminal:', data.output);
     } catch (err) {}
   };
   return (
     <>
-    <div className="my-2 d-flex px-2" >
-      <button className="run-code-button" style={{height:"50px"}} onClick={handleRun}>
-        Run Code
-      </button>
-      <div className="output-container">
+      <div className="">
+        <button
+          className="mine-button"
+          onClick={handleRun}
+        >
+          Run Code
+        </button>
+        {/* <div className="output-container">
         {output && <Output output={output} />}
+      </div> */}
       </div>
-
-    </div>
     </>
   );
 }

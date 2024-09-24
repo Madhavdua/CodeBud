@@ -5,8 +5,9 @@ function Output(props) {
     <>
       <div
         style={{
-          width: "100%",
-          height: "200px", // Set a fixed height for scrolling
+          width: "90vw",
+          minHeight: "300px",
+          height:"fit-content", // Set a fixed height for scrolling
           padding: "5px",
           overflowY: "auto", // Enable vertical scrolling
           backgroundColor: "black",

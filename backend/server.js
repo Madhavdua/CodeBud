@@ -45,9 +45,9 @@ app.post('/run-code', (req, res) => {
     });
   });
 // Route to handle query requests
-app.post("/api/query/:msg", async (req, res) => {
-    const query = req.params.msg; // Getting the query from the route parameter
-
+app.post("/api/query", async (req, res) => {
+    const query = req.body.query; // Getting the query from the route parameter
+  // console.log(query);
     try {
       // Make a POST request to the API
       const response = await axios.post(

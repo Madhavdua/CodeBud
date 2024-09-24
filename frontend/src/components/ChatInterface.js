@@ -3,25 +3,25 @@ import './ChatInterface.css';
 import './mystyle.css'
 
 const ChatInterface = (props) => {
+  const {handleSend,setwhite}=props;
    // Store chat messages (user and bot)
    // Store input field value
    const [input, setInput] = useState('');
   const handleChat=()=>{
-    props.handleSend(input);
+    
+    setwhite("chatresult");
+    handleSend(input);
     setInput('');
   }
 
   return (
     <div className="chat-interface">
-      {/* Chat window displaying user and bot messages */}
-      
-      {/* Input area to type new messages */}
       <div className="chat-input" style={{width:"400px"}}>
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)} // Update the input field
-          placeholder="Type a message..."
+          placeholder="Write any query"
         />
         <button onClick={handleChat}>Send</button>
       </div>
