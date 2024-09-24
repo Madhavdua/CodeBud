@@ -9,7 +9,7 @@ const fs = require('fs');
 require("dotenv").config();
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT|| 5000;
 
 app.use(cors());
 // Middleware to parse JSON bodies
@@ -77,7 +77,7 @@ app.post("/api/query", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on port: ${port}`);
 });
 
 // app.post('',)

@@ -3,11 +3,12 @@ import Output from "./Output";
 import "./mystyle.css";
 
 function RunCode(props) {
+  const serverUrl="https://codebud-65bv.onrender.com";
   const { setoutput } = props;
   const handleRun = async () => {
     const { code, setwhite } = props;
     try {
-      const response = await fetch("http://localhost:5000/run-code", {
+      const response = await fetch(`${serverUrl}/run-code`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

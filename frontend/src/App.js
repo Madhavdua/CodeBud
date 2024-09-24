@@ -5,6 +5,10 @@ import Navbar from "./components/Navbar";
 import White from "./components/White";
 
 function App() {
+const serverUrl="https://codebud-65bv.onrender.com";
+// for localserver -> http://localhost:5000
+
+
   const [darkMode, setDarkMode] = useState(false);
   const [code, setCode] = useState("");
   
@@ -26,7 +30,7 @@ function App() {
 
     try {
       // Send user's input to the backend
-      const response = await fetch(`http://localhost:5000/api/query/`, {
+      const response = await fetch(`${serverUrl}/api/query/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
