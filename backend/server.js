@@ -11,9 +11,12 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT|| 5000;
 
-app.use(cors());
+app.options('*', cors()); // Allow preflight requests for all routes
+
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded());
 
 // OpenAI API key and endpoint
 const apiKey = process.env.API_KEY; // Use environment variable
