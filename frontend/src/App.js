@@ -22,11 +22,6 @@ function App() {
   const handleSend = async (q) => {
     
     setMessages([{text:"Getting response....."}]);
-    // Add user's message to the messages array
-    // setMessages((prevMessages) => [
-    //   ...prevMessages,
-    //   { text: q, sender: "user" }
-    // ]);
 
     try {
       // Send user's input to the backend
