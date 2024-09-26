@@ -3,8 +3,7 @@ import Output from "./Output";
 import "./mystyle.css";
 
 function RunCode(props) {
-  const serverUrl="https://codebud-65bv.onrender.com";
-  // const serverUrl="http://localhost:5000";
+  const serverUrl= process.env.REACT_APP_SERVER_URL||"http://localhost:5000";
   const { setoutput } = props;
   const handleRun = async () => {
     const { code, setwhite } = props;

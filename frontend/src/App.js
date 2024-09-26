@@ -5,8 +5,7 @@ import Navbar from "./components/Navbar";
 import White from "./components/White";
 
 function App() {
-const serverUrl="https://codebud-65bv.onrender.com";
-// const serverUrl="http://localhost:5000";
+  const serverUrl= process.env.REACT_APP_SERVER_URL||"http://localhost:5000";
 
 
 
