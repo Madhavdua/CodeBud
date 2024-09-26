@@ -6,7 +6,8 @@ import White from "./components/White";
 
 function App() {
 const serverUrl="https://codebud-65bv.onrender.com";
-// for localserver -> http://localhost:5000
+// const serverUrl="http://localhost:5000";
+
 
 
   const [darkMode, setDarkMode] = useState(false);
