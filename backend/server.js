@@ -9,71 +9,90 @@ const fs = require('fs');
 require("dotenv").config();
 
 const app = express();
-const port = process.env.PORT|| 5000;
+const port = process.env.PORT || 5000;
 
-app.options('*', cors()); // Allow preflight requests for all routes
+// CORS setup: Allow requests from specific origins if needed, else default to allowing all.
+app.use(cors({
+  origin: '*'  // In production, change '*' to a specific domain (e.g., 'https://yourdomain.com')
+}));
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
-// OpenAI API key and endpoint
-const apiKey = process.env.API_KEY; // Use environment variable
+// Check if the API key is available
+if (!process.env.API_KEY) {
+  console.error("No API key found. Please set the API_KEY in the environment variables.");
+  process.exit(1);
+}
+
+const apiKey = process.env.API_KEY;
 const apiUrl = "https://api.cohere.ai/v1/generate";
 
+// Route to execute user-submitted code
 app.post('/run-code', (req, res) => {
-    const code = req.body.code;
-    // console.log(code);
+  const code = req.body.code;
 
+  if (typeof code !== 'string') {
+    res.status(400).json({ error: 'Invalid code format' });
+    return;
+  }
+
+  const filePath = 'temp.js';
   
-    if (typeof code !== 'string') {
-      res.status(400).json({ error: 'Invalid code format' });
-      return;
-    }
-  
-    // Create a temporary file to store the code
-    const filePath = 'temp.js';
+  try {
+    // Write the code to a temporary file
     fs.writeFileSync(filePath, code);
-  
-    // Execute the code
+
+    // Execute the code using Node.js
     exec(`node ${filePath}`, (error, stdout, stderr) => {
+      // Clean up the temporary file after execution
+      fs.unlinkSync(filePath);
+
       if (error) {
-        console.error(`Error executing code: ${error}`);
-        res.json({ output: stderr });
+        console.error(`Execution error: ${error}`);
+        res.status(500).json({ output: stderr });
         return;
       }
-      console.log(`Code executed successfully: ${stdout}`);
+
       res.json({ output: stdout });
     });
-  });
+
+  } catch (err) {
+    console.error('Error handling code execution:', err.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // Route to handle query requests
 app.post("/api/query", async (req, res) => {
-    const query = req.body.query; // Getting the query from the route parameter
-  // console.log(query);
-    try {
-      // Make a POST request to the API
-      const response = await axios.post(
-        apiUrl,
-        {
-          prompt: query,
-          max_tokens: 200, // Adjust as needed
+  const query = req.body.query;
+
+  if (!query || typeof query !== 'string') {
+    res.status(400).json({ error: 'Invalid query format' });
+    return;
+  }
+
+  try {
+    const response = await axios.post(
+      apiUrl,
+      {
+        prompt: query,
+        max_tokens: 200, // Adjust as needed
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
         },
-        {
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      }
+    );
 
-      // Log the response data to the console
-    //   console.log("Response from API:", response.data);
+    // Send the generated text back to the client
+    res.send(response.data);
 
-      // Send the generated text back to the client
-      res.send(response.data); // Assuming you're in an Express.js environment
-    }
-   catch (error) {
+  } catch (error) {
     console.error("Error generating text:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -82,17 +101,3 @@ app.post("/api/query", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
 });
-
-// app.post('',)
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const cors = require('cors');
-
-// const app = express();
-// app.use(cors());
-// app.use(bodyParser.json());
-
-
-
-// const PORT = 5000;
-// app.listen(PORT, () => console.log(Server running on port ${PORT}));
